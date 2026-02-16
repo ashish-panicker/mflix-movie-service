@@ -1,0 +1,62 @@
+{
+  "_id": {
+    "$oid": "573a1390f29313caabcd5a93"
+  },
+  "plot": "Christ takes on the form of a pacifist count to end a senseless war.",
+  "genres": [
+    "Drama"
+  ],
+  "runtime": 78,
+  "cast": [
+    "Howard C. Hickman",
+    "Enid Markey",
+    "Lola May",
+    "Kate Bruce"
+  ],
+  "num_mflix_comments": 0,
+  "poster": "https://m.media-amazon.com/images/M/MV5BMjAwNTIxMjE5N15BMl5BanBnXkFtZTgwODc1Mjg1MzE@._V1_SY1000_SX677_AL_.jpg",
+  "title": "Civilization",
+  "fullplot": "Allegorical film about peace. A king starts a war, many of the women are against it, people are pressed into service. A count has constructed a submarine and gets the order to sink an ocean liner, that is also carrying - supposedly - ammunition for the enemy. The count refuses to fire the torpedos, and sinks the submarine. He survives, but in a limbo between death and life where he meets Jesus, who takes him over to preach peace. Naturally the king arrests him and sentences him to death for treason, but then Jesus shows him the real face of war.",
+  "countries": [
+    "USA"
+  ],
+  "released": {
+    "$date": {
+      "$numberLong": "-1690934400000"
+    }
+  },
+  "directors": [
+    "Reginald Barker",
+    "Thomas H. Ince",
+    "Raymond B. West",
+    "Walter Edwards",
+    "David Hartford",
+    "Jay Hunt",
+    "J. Parker Read Jr."
+  ],
+  "writers": [
+    "C. Gardner Sullivan"
+  ],
+  "awards": {
+    "wins": 1,
+    "nominations": 0,
+    "text": "1 win."
+  },
+  "lastupdated": "2015-04-30 02:13:27.863000000",
+  "year": 1916,
+  "imdb": {
+    "rating": 6.3,
+    "votes": 162,
+    "id": 6517
+  },
+  "type": "movie",
+  "tomatoes": {
+    "viewer": {
+      "rating": 0,
+      "numReviews": 7
+    },
+    "lastUpdated": {
+      "$date": "2015-08-07T18:42:35Z"
+    }
+  }
+}

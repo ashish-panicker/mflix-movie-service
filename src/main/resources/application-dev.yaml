@@ -1,0 +1,22 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://ashishspanicker_db_user:bAde9cIZ3gM6y0js@cluster0.fj7ucj0.mongodb.net/sample_mflix?appName=Cluster0
+      auto-index-creation: true
+  jackson:
+    serialization:
+      write-date-keys-as-timestamps: false
+logging:
+  level:
+    root: WARN
+    org:
+      mongodb:
+        driver:
+          protocol:
+            command: DEBUG
+      springframework:
+        data:
+          mongodb:
+            core:
+              MongoTemplate: DEBUG
+              ReactiveMongoTemplate: DEBUG
