@@ -11,7 +11,7 @@ public class MovieMapper {
                 movie.getId(), movie.getTitle(), movie.getGenres(),
                 movie.getImdb() != null ? movie.getImdb().rating() : 0,
                 movie.getRuntime() == null ? 0 : movie.getRuntime(),
-                movie.getPoster()
+                movie.getPoster(), movie.getScore()
         );
     }
 

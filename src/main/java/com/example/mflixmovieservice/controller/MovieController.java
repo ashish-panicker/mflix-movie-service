@@ -62,7 +62,7 @@ public class MovieController {
 
     @GetMapping("/search")
     public Page<MovieListItem> searchByKeyWord(@RequestParam String keyWord, Pageable pageable) {
-        return service.keyWordSearch(keyWord, pageable);
+        return service.keyWordSearchByMongoTemplate(keyWord, pageable);
     }
 
 }

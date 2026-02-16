@@ -1,5 +1,6 @@
 package com.example.mflixmovieservice.domain.service.impl;
 
+import com.example.mflixmovieservice.domain.docs.Movie;
 import com.example.mflixmovieservice.domain.repo.MovieRepository;
 import com.example.mflixmovieservice.domain.service.MovieService;
 import com.example.mflixmovieservice.dto.mapper.MovieMapper;
@@ -7,11 +8,12 @@ import com.example.mflixmovieservice.dto.response.MovieItem;
 import com.example.mflixmovieservice.dto.response.MovieListItem;
 import com.example.mflixmovieservice.exceptions.MovieNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.TextCriteria;
+import org.springframework.data.mongodb.core.query.TextQuery;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -21,6 +23,7 @@ import java.time.LocalDate;
 public class MovieServiceImpl implements MovieService {
 
     private final MovieRepository repository;
+    private final MongoTemplate mongoTemplate;
 
     @Override
     public Page<MovieListItem> listMovies(Pageable pageable) {
@@ -68,5 +71,27 @@ public class MovieServiceImpl implements MovieService {
         );
         return repository.findAllBy(criteria, sortedPage)
                 .map(MovieMapper::toMovieListItem);
+    }
+
+    @Override
+    public Page<MovieListItem> keyWordSearchByMongoTemplate(String keyWord, Pageable pageable) {
+        // Define the text criteria
+        var criteria = TextCriteria.forDefaultLanguage().matching(keyWord);
+
+        // var filterCriteria = Criteria.where("deleted").is(false);
+
+        // Build the query
+        var query = TextQuery.queryText(criteria).sortByScore().with(pageable);
+
+        // Execute the query
+        var movies = mongoTemplate.find(query, Movie.class);
+
+        // Count the total result
+        long total = mongoTemplate.count(Query.query(criteria), Movie.class);
+
+        // map to DTOs
+        var dtoList = movies.stream().map(MovieMapper::toMovieListItem).toList();
+
+        return new PageImpl<>(dtoList, pageable, total);
     }
 }

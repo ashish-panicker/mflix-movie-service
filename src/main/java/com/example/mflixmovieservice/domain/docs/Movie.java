@@ -6,6 +6,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.mongodb.core.mapping.TextScore;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -53,5 +54,8 @@ public class Movie {
     private Imdb imdb;
 
     private Awards awards;
+
+    @TextScore
+    private Float score;
 
 }

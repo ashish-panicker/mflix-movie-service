@@ -24,4 +24,6 @@ public interface MovieService {
     Page<MovieListItem> findByReleaseDateBetween(LocalDate startDate, LocalDate endDate, Pageable pageable);
 
     Page<MovieListItem> keyWordSearch(String keyWord, Pageable pageable);
+
+    Page<MovieListItem> keyWordSearchByMongoTemplate(String keyWord, Pageable pageable);
 }
