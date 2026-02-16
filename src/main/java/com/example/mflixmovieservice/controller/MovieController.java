@@ -18,6 +18,14 @@ public class MovieController {
 
     private final MovieService service;
 
+    /**
+     * Using pageable urls
+     * GET /api/v1/movies?page=0&size=10
+     * GET /api/v1/movies?page=0&size=10&sort=title,asc
+     * GET /api/v1/movies?page=0&size=10&sort=imdb.rating,desc
+     * GET /api/v1/movies?page=0&size=10&sort=runtime,desc&sort=title,asc
+     */
+
     @GetMapping
     public Page<MovieListItem> listMovies(Pageable pageable) {
         return service.listRatedMovies(pageable);
