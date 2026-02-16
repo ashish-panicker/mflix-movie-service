@@ -10,6 +10,7 @@ import java.time.LocalDate;
 
 public interface MovieService {
 
+
     Page<MovieListItem> listMovies(Pageable pageable);
 
     Page<MovieListItem> listRatedMovies(Pageable pageable);
@@ -21,4 +22,6 @@ public interface MovieService {
     Page<MovieListItem> findByGenreAndMinRating(String genre, double rating, Pageable pageable);
 
     Page<MovieListItem> findByReleaseDateBetween(LocalDate startDate, LocalDate endDate, Pageable pageable);
+
+    Page<MovieListItem> keyWordSearch(String keyWord, Pageable pageable);
 }

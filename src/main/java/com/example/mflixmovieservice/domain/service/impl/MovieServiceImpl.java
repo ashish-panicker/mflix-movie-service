@@ -8,7 +8,10 @@ import com.example.mflixmovieservice.dto.response.MovieListItem;
 import com.example.mflixmovieservice.exceptions.MovieNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.core.query.TextCriteria;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -53,6 +56,17 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public Page<MovieListItem> findByReleaseDateBetween(LocalDate startDate, LocalDate endDate, Pageable pageable) {
         return repository.findByReleaseDateBetween(startDate, endDate, pageable)
+                .map(MovieMapper::toMovieListItem);
+    }
+
+    @Override
+    public Page<MovieListItem> keyWordSearch(String keyWord, Pageable pageable) {
+        var criteria = TextCriteria.forDefaultLanguage().matching(keyWord);
+        Pageable sortedPage = PageRequest.of(
+                pageable.getPageNumber(), pageable.getPageSize(),
+                Sort.by(Sort.Order.desc("score"))
+        );
+        return repository.findAllBy(criteria, sortedPage)
                 .map(MovieMapper::toMovieListItem);
     }
 }

@@ -60,5 +60,9 @@ public class MovieController {
         return service.findByReleaseDateBetween(start, end, pageable);
     }
 
+    @GetMapping("/search")
+    public Page<MovieListItem> searchByKeyWord(@RequestParam String keyWord, Pageable pageable) {
+        return service.keyWordSearch(keyWord, pageable);
+    }
 
 }
