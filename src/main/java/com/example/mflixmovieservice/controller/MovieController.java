@@ -6,10 +6,10 @@ import com.example.mflixmovieservice.dto.response.MovieListItem;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
 
 @RestController
 @RequestMapping("/api/v1/movies")
@@ -45,5 +45,20 @@ public class MovieController {
     public Page<MovieListItem> listRatedMovies(Pageable pageable) {
         return service.listRatedMovies(pageable);
     }
+
+    @GetMapping("/filter/genre")
+    public Page<MovieListItem> getByGenreAndMinRating(@RequestParam String genre,
+                                                      @RequestParam double rating,
+                                                      Pageable pageable) {
+        return service.findByGenreAndMinRating(genre, rating, pageable);
+    }
+
+    @GetMapping("/filter/dates")
+    public Page<MovieListItem> getByReleaseDateBetween(@RequestParam LocalDate start,
+                                                       @RequestParam LocalDate end,
+                                                       Pageable pageable) {
+        return service.findByReleaseDateBetween(start, end, pageable);
+    }
+
 
 }

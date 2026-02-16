@@ -11,6 +11,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+
 @Service
 @RequiredArgsConstructor
 public class MovieServiceImpl implements MovieService {
@@ -40,5 +42,17 @@ public class MovieServiceImpl implements MovieService {
         var movie = repository.findById(id)
                 .orElseThrow(() -> new MovieNotFoundException(id));
         return MovieMapper.toMovieItem(movie);
+    }
+
+    @Override
+    public Page<MovieListItem> findByGenreAndMinRating(String genre, double rating, Pageable pageable) {
+        return repository.findByGenreAndMinRating(genre, rating, pageable)
+                .map(MovieMapper::toMovieListItem);
+    }
+
+    @Override
+    public Page<MovieListItem> findByReleaseDateBetween(LocalDate startDate, LocalDate endDate, Pageable pageable) {
+        return repository.findByReleaseDateBetween(startDate, endDate, pageable)
+                .map(MovieMapper::toMovieListItem);
     }
 }
